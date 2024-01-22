@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -35,12 +36,19 @@ class PostController extends Controller
     {
         $data = $request->validated();
 
+        $image = $data['poster'];
+        $imageName = Str::random(40) . '.' . $image->getClientOriginalExtension();
+        $image->move(
+            storage_path() . '/app/public/posts/posters',
+            $imageName
+        );
+
         $post = new Post();
 
         $post->name        = $data['name'];
         $post->description = $data['description'] ?? null;
         $post->content     = $data['content'];
-        $post->poster      = $data['poster'];
+        $post->poster      = $imageName;
 
         $post->save();
 
@@ -74,8 +82,8 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post): ?bool
     {
-        //
+        return $post->delete();
     }
 }
