@@ -20,6 +20,15 @@
         <input type="file" name="poster" id="poster">
     </label>
 
+    <label>
+        Категория
+        <select name="category_ids" id="category_ids" multiple>
+            @foreach($categories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+        </select>
+    </label>
+
     <button type="submit">
         <span>Сохранить</span>
     </button>
