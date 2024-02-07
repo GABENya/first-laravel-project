@@ -4,29 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property int    $id
- * @property string $name
- * @property string $description
  * @property string $content
- * @property string $poster
+ * @property int $user_id
+ * @property int $post_id
  * @property string $created_at
  * @property string $updated_at
  */
-class Post extends Model
+class Comment extends Model
 {
     use HasFactory;
 
-    public function categories(): BelongsToMany
+    public function user():\Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function post(): BelongsTo
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(Post::class);
     }
 
 }
