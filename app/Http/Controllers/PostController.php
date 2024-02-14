@@ -20,6 +20,7 @@ class PostController extends Controller
     public function index(): Collection
     {
         return Post::with('categories')->get();
+        return view('posts.index',compact('posts'));
     }
 
     /**
