@@ -28,7 +28,7 @@ class PostStoreRequest extends FormRequest
             'content'        => 'required|string|min:10',
             'poster'         => 'required|image:jpg,jpeg,png|max:10240',
             'category_ids'   => 'array',
-            'category_ids.*' => 'sometimes|integer',
+            'category_ids.*' => 'integer',
         ];
     }
 }

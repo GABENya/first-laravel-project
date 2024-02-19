@@ -19,7 +19,8 @@ class PostController extends Controller
      */
     public function index(): Collection
     {
-        return Post::all();
+        return Post::with('categories')->get();
+        return view('posts.index',compact('posts'));
     }
 
     /**
@@ -55,10 +56,14 @@ class PostController extends Controller
 
         $post->save();
 
-        if($data['category_ids']) {
+        $post->load('categories');
+
+
+        if(array_key_exists($data['category_ids'])) {
 
             $post->categories()->attach($data['$category_id']);
         }
+        $post->load('categories');
         return $post;
     }
 
