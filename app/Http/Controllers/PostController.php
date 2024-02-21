@@ -17,10 +17,11 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Collection
+    public function index(): Factory|View|Application
     {
-        return Post::with('categories')->get();
-        return view('posts.index',compact('posts'));
+        $posts = Post::with('categories')->get();
+
+        return view('index', compact('posts'));
     }
 
     /**
