@@ -60,9 +60,8 @@ class PostController extends Controller
         $post->load('categories');
 
 
-        if(array_key_exists($data['category_ids'])) {
-
-            $post->categories()->attach($data['$category_id']);
+        if(array_key_exists('category_ids', $data)) {
+            $post->categories()->attach($data['category_ids']);
         }
         $post->load('categories');
         return $post;
