@@ -32,8 +32,8 @@
                             </div>
                             <div class="blog-post-format">
                                 <span><a href="#"><img src="{{ asset('assets/images/author-imagel.jpg') }}" class="img-responsive img-circle"> Jen Lopez</a></span>
-                                <span><i class="fa fa-date"></i>{{ $post -> created_at }}</span>
-                                <span><i class="fa fa-comment-o"></i> 35 Comments</span>
+                                <span><i class="fa fa-date"></i>{{ $post -> created_at->translatedFormat('d F, Y') }}</span>
+                                <span><i class="fa fa-comment-o"></i>{{ trans_choice(':count коментарий|:count коммнтария|:count комментариев', $post->comments->count() ) }}</span>
                             </div>
                             <div class="blog-post-des">
                                 <p>{{ $post->description}}</p>
