@@ -73,6 +73,15 @@
                                                 <span>{{ $comment->created_at->translatedFormat('j F Y') }}</span>
                                             @endif
                                             <p>{{ $comment->content }}</p>
+                                            <form
+                                                action="{{ route('comments.destroy', $comment->id) }}"
+                                                method="post"
+                                                onsubmit="return confirm('Вы уверены?');"
+                                             >
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-secondary btn-dark" onmouseover="this.classList.remove('btn-secondary'); this.classList.add('btn-dark');" onmouseout="this.classList.remove('btn-dark'); this.classList.add('btn-secondary');"><i class="fa fa-trash"></i> Удалить</button>
+                                            </form>
                                         </div>
                                     </div>
                                 @endforeach
@@ -82,7 +91,9 @@
 
                     <div class="blog-comment-form">
                         <h3>Оставить комментарий</h3>
-                        <form action="#" method="post">
+                        <form action="{{ route('comments.store') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="post_id" value="{{ $post->id }}">
                             <input type="text" class="form-control" placeholder="Name" name="name" required>
                             <input type="email" class="form-control" placeholder="Email" name="email" required>
                             <textarea name="message" rows="5" class="form-control" id="message" placeholder="Message"
