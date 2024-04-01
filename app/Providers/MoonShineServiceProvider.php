@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Post;
 use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\PostResource;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
@@ -40,7 +41,7 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
             ]),
             MenuGroup::make('Статьи', [
                 MenuItem::make('Посты', new PostResource())
-                    ->badge(fn() => Post::Count())
+                    ->badge(fn() => Post::count())
                 ->icon('heroicons.outline.academic-cap'),
                 MenuItem::make('Категории', new CategoryResource())
             ]),
