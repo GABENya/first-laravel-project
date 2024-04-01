@@ -17,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PostController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -36,10 +34,8 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::resource('posts', PostController::class)->only(['create','store','destroy']);
 
     Route::resource('categories', CategoryController::class)->only(['create','store','destroy']);
-
-
 });
 
-Route::resource('posts', PostController::class)->only(['index','show']);
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::resource('categories', CategoryController::class)->only(['index','show']);
 require __DIR__.'/auth.php';
