@@ -41,6 +41,9 @@ class PostResource extends ModelResource
                     ->required()
                     ->hideOnIndex(),
                BelongsToMany::make('Категории','categories',resource: new CategoryResource())
+                ->selectMode()
+                ->placeholder('Кликните и начните ввод для поиска')
+                ->inLine(badge: true),
             ]),
         ];
     }
