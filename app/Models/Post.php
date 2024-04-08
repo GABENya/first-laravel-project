@@ -19,6 +19,13 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected array $dates = ['created_at'];
+
+    public function getRouteKeyName():string
+    {
+        return 'slug';
+    }
+
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Post;
 use MoonShine\Fields\Image;
 use MoonShine\Fields\Relationships\BelongsToMany;
+use MoonShine\Fields\Slug;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\TinyMce;
 use MoonShine\Resources\ModelResource;
@@ -32,6 +33,10 @@ class PostResource extends ModelResource
                 Text::make('Название','name')
                     ->required()
                     ->sortable(),
+                Slug::make('Читаемая ссылка','slug')
+                    ->unique()
+                    ->from('name')
+                    ->hint('Заполниться автоматически , если оставить пустым'),
                 TinyMce::make('Краткое описание','description')
                     ->hideOnIndex(),
                 TinyMce::make('Текст','content')
