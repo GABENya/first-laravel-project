@@ -36,8 +36,10 @@
                         </div>
 
                         <div class="blog-post-des">
-                            {{ $post->description }}
+                            {!! $post->description !!}
                         </div>
+
+                        {!! $post->content !!}
 
                         <div class="blog-author">
                             <div class="media">
@@ -72,7 +74,7 @@
                                             @else
                                                 <span>{{ $comment->created_at->translatedFormat('j F Y') }}</span>
                                             @endif
-                                            <p>{{ $comment->content }}</p>
+                                            {!! $comment->content !!}
                                             <form
                                                 action="{{ route('comments.destroy', $comment->id) }}"
                                                 method="post"
@@ -110,7 +112,7 @@
     </section>
     <style>
         .main-single-post {
-            background: url({{ asset('storage/posts/posters/' . $post->poster) }}) no-repeat;
+            background: url({{ asset('storage/' . $post->poster) }}) no-repeat;
         }
     </style>
 @endsection
